@@ -2,7 +2,7 @@
 * Modele de production d'electricite
 *
 * Version 6: nous ajoutons les émissions de CO2, tarifs de rachat dans fonction de coûts
-* version mars 2012
+* version mars 2013
 *
 * Power plant
 *
