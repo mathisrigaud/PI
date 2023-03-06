@@ -1,8 +1,8 @@
 *
 * Modele de production d'electricite
 *
-* Version 6: nous ajoutons les émissions de CO2, tarifs de rachat dans fonction de coûts
-* version mars 2011
+* Version 6: nous ajoutons les Ã©missions de CO2, tarifs de rachat dans fonction de coÃ»ts
+* version mars 2012
 *
 * Power plant
 *
@@ -40,7 +40,7 @@ Set iunit3(iunit);
 iunit3(iunit) = iunit(iunit)-iurenew(iunit) ;
 
 
-*Regarder le coût du biogaz #à mettre à jour
+*Regarder le coÃ»t du biogaz #Ã  mettre Ã  jour
 Set ifuel / OU    Uranium 233,
             COAL  Hard coal,
             HFO   Heating Fuel Oil,
@@ -92,7 +92,7 @@ Set    season /s1 winter,
 
 *Set   ss1(season)/s2,s3,s4/;
 
-Set    ph /p0  sous-période de pointe,
+Set    ph /p0  sous-pÃ©riode de pointe,
            p1  pointe,
            p2  semi-base,
            p3  base/;
@@ -104,7 +104,7 @@ Set alea /a1,a2,a3/;
 set alea1(alea) / a1,a2,a3 /;
 
 Parameter  probalea(alea) alea probabilities season /
-* travailler sur la distribution aléatoire
+* travailler sur la distribution alÃ©atoire
 a1  0.6
 a2  0.2
 a3  0.2
@@ -112,7 +112,7 @@ a3  0.2
 
 
 Parameter   capini(iunit)/
-* unité :  GW par an
+* unitÃ© :  GW par an
 * CHP electric power only
 * COO has the same characteristics as COC
 *
@@ -172,8 +172,8 @@ IPO     1.     1.     1.     1.
 *coefficient d'usage de la puissance des lacs; on utilise 8760*0.21 h la puissance totale des lacs.
 *set eta /0.23*8760/;
 
-*quantité d'eau tombée dans l'année: on l'obtient en supposant que la quantité turbinée est égale à la quantité d'eau tombée. Pour la calculer, nous prenons
-* la production hydro-électrique française que nous divisons par 8760. Nous obtenons la quantité par heure que nous multiplierons par la durée turbinée.
+*quantitÃ© d'eau tombÃ©e dans l'annÃ©e: on l'obtient en supposant que la quantitÃ© turbinÃ©e est Ã©gale Ã  la quantitÃ© d'eau tombÃ©e. Pour la calculer, nous prenons
+* la production hydro-Ã©lectrique franÃ§aise que nous divisons par 8760. Nous obtenons la quantitÃ© par heure que nous multiplierons par la durÃ©e turbinÃ©e.
 *set RAIN /3184.93 /;
 
 set interunitfuel(iunit,ifuel1)/
@@ -212,7 +212,7 @@ Parameter fuelcost1(ifuel1)/
 *coal (dollars/t hors taxe 2007), HFO (dollars/t hors taxe fioul 1% en 2007), HTO (dollars/t hors taxe 2007), GA (dollars/MBtu hors taxe en 2007), TOP (euro/t)
 *ou  (euro/MWh valeur en 2008 DGEMP)       BIG (euro/MWh: tarif moyen de production: SOLAGRO)
 * source: BP statistical review 2009
-* prix du biogaz à vérifier
+* prix du biogaz Ã  vÃ©rifier
 OU      4.4
 *COAL   81.60
 *HFO   348.66
@@ -311,7 +311,7 @@ BIG     0.0
 /;
 
 Table dispf1(ifuel1,season)
-* je cale ma disponibilité en biogaz, wood waste et oth2 en fonction de la dispo pour l'usage elec uniquement sachant que pour 1t de biomasse utilisée seule 0.2t sert à la prod de MWh
+* je cale ma disponibilitÃ© en biogaz, wood waste et oth2 en fonction de la dispo pour l'usage elec uniquement sachant que pour 1t de biomasse utilisÃ©e seule 0.2t sert Ã  la prod de MWh
 
              s1                s2               s3            s4
 OU         1E+30           1.00E+31        1.00E+31        1.00E+31
@@ -334,7 +334,7 @@ dispf2(ifuel2,season)=9999999999999999000000000.;
 
 Table demelec(ph,season,alea)
 *GW
-*on subdivise la période de pointe en PO et P1 pour prendre en compte les demandes extrêmes de la période de pointe
+*on subdivise la pÃ©riode de pointe en PO et P1 pour prendre en compte les demandes extrÃªmes de la pÃ©riode de pointe
 *
 * Il faut redefinir les valeurs pour 2019 - 2020
 *
@@ -371,12 +371,12 @@ P3     1039.      719.    1778.   1488.
 ;
 
 *Hydro-power modelization
-*postes horaires cumulés: z4 correspond au cumul des 4 postes à la saison 1
+*postes horaires cumulÃ©s: z4 correspond au cumul des 4 postes Ã  la saison 1
 set g/g4,g3,g2,g1/;
 set q/q4,q3/;
 set c/c4,c3/;
 
-*production cumulée max pour le nombre de postes j par saison i : pcs_ij
+*production cumulÃ©e max pour le nombre de postes j par saison i : pcs_ij
 set pcs1/ pcs14, pcs13, pcs12, pcs11/ ;
 set pcs2/ pcs24, pcs23/;
 set pcs3/ pcs34, pcs33/;
@@ -406,12 +406,12 @@ c3   0      0    1870    0
 ;
 
 
-*production maximale pour la saison 1 cumulée décroissante en fonction du nombre de postes restant dans la saison¨en MWh
+*production maximale pour la saison 1 cumulÃ©e dÃ©croissante en fonction du nombre de postes restant dans la saisonÂ¨en MWh
 Parameters
  RHS1(pcs1) /pcs14 6174000,pcs13 4760960,pcs12 3386400, pcs11 843200/
  RHS2(pcs2) /pcs24 4181180,pcs23 3203340/
  RHS3(pcs3)/ pcs34 10418688 , pcs33 8000608/
-* nombre d'heure max dans la saison 4 où les turbines peuvent tourner
+* nombre d'heure max dans la saison 4 oÃ¹ les turbines peuvent tourner
  HS4 /312.48  /;
 
 set PS(PH,season)/
@@ -422,7 +422,7 @@ set interTOPunit(ifuel4,iunit)/
     TOP1.(THC,COC,COT),TOP2.(THC,COC,COT)/
 ;
 
-* Annual Fixed cost euro/MWh incluant le coût du capital
+* Annual Fixed cost euro/MWh incluant le coÃ»t du capital
 Parameter fcost(iunit) /
 * we get the data from CTP for COG and THC for COC and COF
 
